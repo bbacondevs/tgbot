@@ -1,0 +1,7 @@
+aiogram==2.25.1
+asyncio==3.4.3
+fastapi==0.95.1
+openai==0.27.6
+pydantic==1.10.7
+python-telegram-bot @ file:///home/conda/feedstock_root/build_artifacts/python-telegram-bot_1679753218901/work
+uvicorn==0.22.0

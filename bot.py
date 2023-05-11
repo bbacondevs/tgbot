@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
     API_TOKEN = "YOUR TELEGRAM BOT API TOKEN"
     OPENAI_API_KEY = "YOUR OPENAI API KEY"
-    WEBHOOK_HOST = "https://your.domain"
+    WEBHOOK_HOST = "https://bbacontg.herokuapp.com/"
 
     openai.api_key = OPENAI_API_KEY
     webhook_server = WebhookServer(WEBHOOK_HOST, API_TOKEN)
