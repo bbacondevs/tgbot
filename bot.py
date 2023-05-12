@@ -1,5 +1,6 @@
 import logging
 import openai
+import os
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -10,6 +11,10 @@ from telegram.ext import (
     filters,
 )
 from pydantic import BaseModel
+
+TOKEN = os.environ.get("TOKEN")  # Replace with your Telegram Bot Token
+OPENAI = os.environ.get("OPENAI")  # Replace with your OpenAI Key
+openai.api_key = OPENAI
 
 
 class UpdateModel(BaseModel):
@@ -44,9 +49,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.message.chat.id, text=response_text)
 
 
-@app.post("/webhook")
 async def handle_update(update: UpdateModel):
-    application = ApplicationBuilder().token(API_TOKEN).build()
+    application = ApplicationBuilder().token(TOKEN).build()
     update_obj = Update.de_json(update.dict(), application.bot)
 
     if update_obj.message.text.startswith("/start"):
@@ -61,14 +65,6 @@ async def handle_update(update: UpdateModel):
 
 if __name__ == "__main__":
     import uvicorn
-    from webhook_server import WebhookServer
+    from webhook import app  # Import the FastAPI app instance directly
 
-    API_TOKEN = "YOUR TELEGRAM BOT API TOKEN"
-    OPENAI_API_KEY = "YOUR OPENAI API KEY"
-    WEBHOOK_HOST = "https://bbacontg.herokuapp.com/"
-
-    openai.api_key = OPENAI_API_KEY
-    webhook_server = WebhookServer(WEBHOOK_HOST, API_TOKEN)
-
-    app = webhook_server.get_app()
     uvicorn.run(app, host="0.0.0.0", port=8000)
