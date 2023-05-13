@@ -11,6 +11,7 @@ from telegram.ext import (
     filters,
 )
 from pydantic import BaseModel
+
 from dotenv import load_dotenv
 
 load_dotenv()
