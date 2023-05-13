@@ -6,7 +6,7 @@ from bot import handle_update  # Import the handle_update function
 
 
 class WebhookUpdate(BaseModel):
-    upadte_id: int
+    update_id: int
     message: dict
 
 
