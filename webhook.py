@@ -6,8 +6,8 @@ from bot import handle_update  # Import the handle_update function
 
 
 class WebhookUpdate(BaseModel):
-    user_id: int
-    payload: str
+    upadte_id: int
+    message: dict
 
 
 app = FastAPI()
